@@ -11,7 +11,7 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   try {
-    res.status(200).send("Hello welcome to the backend side");
+    res.status(200).send("Hello! welcome to the backend side");
   } catch (error) {
     res.status(404).send({ msg: error.message });
   }
