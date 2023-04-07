@@ -13,13 +13,13 @@ const Blue = () => {
       <div className="text-white flex gap-5 flex-col pt-2">
         <div className="flex flex-col max-w-[65%] gap-3">
           <p>Operative(s)</p>
-          <button className="bg-yellow-300 text-black p-1 pl-2 pr-2 rounded-xl">
+          <button className="bg-yellow-300 text-black p-1 pl-2 pr-2 rounded-xl hover:bg-yellow-400">
             Join as Operative
           </button>
         </div>
         <div className="flex flex-col max-w-[65%] gap-3 ">
           <p>Spymaster(s)</p>
-          <button className="bg-yellow-300 text-black p-1 pl-2 pr-2 rounded-xl">
+          <button className="bg-yellow-300 text-black p-1 pl-2 pr-2 rounded-xl hover:bg-yellow-400">
             Join as Spymaster
           </button>
         </div>
