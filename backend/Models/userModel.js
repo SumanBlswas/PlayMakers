@@ -1,5 +1,11 @@
-const userModel = () => {
-  return <div>userModel</div>;
-};
+const mongoose = require("mongoose")
 
-export default userModel;
+const userSchema = mongoose.Schema({
+  nickname: String
+}, {
+  versionKey: false
+})
+
+const UserModel = mongoose.model("user", userSchema)
+
+module.exports = UserModel;
