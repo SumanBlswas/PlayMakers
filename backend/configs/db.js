@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 dotenv.config();
 
-const connection = mongoose.connect(process.env.MONGO_LINK);
+const connection = mongoose.connect("mongodb://localhost:27017/chat");
 
-export { connection };
+module.exports = { connection };

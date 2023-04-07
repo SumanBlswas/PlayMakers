@@ -1,3 +1,5 @@
-export const validators = () => {
-  return <div>validators</div>;
+const validators = () => {
+
 };
+
+module.exports = validators
