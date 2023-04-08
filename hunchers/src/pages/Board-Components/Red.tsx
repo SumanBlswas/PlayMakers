@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const Red = () => {
   return (
     <div className="bg-red-800 fixed p-5 rounded-2xl m-4">

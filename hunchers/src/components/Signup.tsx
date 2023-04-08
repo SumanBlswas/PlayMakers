@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
 
-interface UserDetails { firstName?: string, lastName?: string, username?: string, password?: string }
+interface UserDetails {
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+  password?: string;
+}
 
 function SignUp({ AuthToggle }: { AuthToggle: (value: Boolean) => void }) {
   const cookies = new Cookies();
