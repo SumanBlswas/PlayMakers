@@ -15,6 +15,7 @@ export default function JoinGame() {
 
   const joinChannel = async () => {
     const response = await client.queryUsers({ name: { $eq: rivalUsername } });
+    /*{ name: { $eq: rivalUsername } }*/
     if (response.users.length === 0) {
       alert("User not found");
       return;
@@ -31,6 +32,7 @@ export default function JoinGame() {
 
   const createChannel = async () => {
     const response = await client.queryUsers({ name: { $eq: rivalUsername } });
+    /*{ name: { $eq: rivalUsername } }*/
     if (response.users.length === 0) {
       alert("User not found");
       return;
@@ -74,6 +76,7 @@ export default function JoinGame() {
           </button>
         </div>
       )}
+          
     </>
   );
 }

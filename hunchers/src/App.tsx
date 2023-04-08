@@ -27,7 +27,11 @@ function App() {
   const cookies = new Cookies();
   const token = cookies.get("token");
   const client = StreamChat.getInstance(api_key);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState<Boolean>(false);
+
+  const AuthToggle = (value: Boolean) => {
+    setIsAuth(value)
+  }
 
   const logOut = () => {
     cookies.remove("token");
@@ -66,8 +70,8 @@ function App() {
         </Chat>
       ) : (
         <>
-          <SignUp setIsAuth={setIsAuth} />
-          <Login setIsAuth={setIsAuth} />
+          <SignUp AuthToggle={AuthToggle} />
+          <Login AuthToggle={AuthToggle} />
         </>
       )}
     </div>
