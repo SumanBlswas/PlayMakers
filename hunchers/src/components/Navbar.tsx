@@ -2,10 +2,6 @@ import { BsStopwatchFill } from "react-icons/bs";
 import PlayersBtn from "./NavabarComponents/PlayersBtn";
 import UserBtn from "./NavabarComponents/UserBtn";
 
-const classNames = (...classes: any) => {
-  return classes.filter(Boolean).join(" ");
-};
-
 const Navbar = () => {
   return (
     <div>
