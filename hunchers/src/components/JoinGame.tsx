@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useChatContext, Channel } from "stream-chat-react";
 // import Game from "./Game";
 import CustomInput from "./CustomInput";
 import Board from "../pages/Board";
-import axios from "axios";
 import { useAppDispatch } from "../redux/store";
 import { CreateRoom, JoinRoom } from "../redux/boardRedux/boardAction";
+
 export default function JoinGame() {
-  const [rivalUsername, setRivalUsername] = useState("");
-  const [userID, SetUserID] = useState("");
+  const [rivalUsername, setRivalUsername] = useState<string>("");
+  const [userID, SetUserID] = useState<string>("");
   const { client } = useChatContext();
-  const [channel, setChannel] = useState(null);
+  const [channel, setChannel] = useState<any>(null);
   const dispatch = useAppDispatch();
 
   const joinChannel = async () => {
     const response = await client.queryUsers({ name: { $eq: rivalUsername } });
-    /*{ name: { $eq: rivalUsername } }*/
+
     if (response.users.length === 0) {
       alert("User not found");
       return;
     }
 
     const newChannel = await client.channel("messaging", {
-      members: [client.userID, response.users[0].id],
+      members: [client.userID as string, response.users[0].id as string],
     });
 
     await newChannel.watch();
@@ -32,27 +32,27 @@ export default function JoinGame() {
 
   const createChannel = async () => {
     const response = await client.queryUsers({ name: { $eq: rivalUsername } });
-    /*{ name: { $eq: rivalUsername } }*/
+
     if (response.users.length === 0) {
       alert("User not found");
       return;
     }
 
-    dispatch(CreateRoom(client.userID));
+    dispatch(CreateRoom(String(client.userID)));
 
     const newChannel = await client.channel("messaging", {
-      members: [client.userID, response.users[0].id],
+      members: [client.userID as string, response.users[0].id as string],
     });
 
     await newChannel.watch();
     setChannel(newChannel);
   };
+
   return (
     <>
       {channel ? (
         <Channel channel={channel} Input={CustomInput}>
-          {/* <h1 channel={channel} setChannel={setChannel} /> */}
-          <Board channel={channel} />
+          <Board />
         </Channel>
       ) : (
         <div className="joinGame">
@@ -76,7 +76,6 @@ export default function JoinGame() {
           </button>
         </div>
       )}
-          
     </>
   );
 }

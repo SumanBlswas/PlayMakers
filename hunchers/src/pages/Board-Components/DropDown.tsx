@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const DropDown = () => {
-  return (
-    <div>DropDown</div>
-  )
-}
+  return <div>DropDown</div>;
+};
 
-export default DropDown
+export default DropDown;

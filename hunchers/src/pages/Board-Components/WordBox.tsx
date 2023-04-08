@@ -1,19 +1,34 @@
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { useChannelStateContext, useChatContext } from "stream-chat-react";
-import { CreateRoom, JoinRoom } from "../../redux/boardRedux/boardAction";
+import { useChannelStateContext } from "stream-chat-react";
+// import { CreateRoom, JoinRoom } from "../../redux/boardRedux/boardAction";
 import { EventTypes } from "stream-chat";
 import { GET_WORDS } from "../../redux/boardRedux/boardTypes";
+
+interface GameMoveEventData {
+  selectedWord: string;
+  index: number;
+}
+
 const WordBox = () => {
   const { channel } = useChannelStateContext();
-  const { client } = useChatContext();
+  // const { client } = useChatContext();
   const [selectedWord, setSelectedWord] = useState<string>("");
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const controls = useAnimation();
   let arr = useAppSelector((state) => state.boardReducer.words);
 
   const [current, setCurrent] = useState<number | null>(null);
+
+  // const ChooseSquare = async (word: string, index: number) => {
+  //   setCurrent(index);
+  //   setSelectedWord(word);
+  //   await channel.sendEvent({
+  //     type: "game-move" as EventTypes,
+  //     data: { selectedWord, index },
+  //   });
+  // };
 
   const ChooseSquare = async (word: string, index: number) => {
     setCurrent(index);
@@ -21,8 +36,9 @@ const WordBox = () => {
     await channel.sendEvent({
       type: "game-move" as EventTypes,
       data: { selectedWord, index },
-    })
-  }
+    });
+  };
+
   useEffect(() => {
     controls.start("animate");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,14 +48,16 @@ const WordBox = () => {
       key={index}
       initial={{ y: -1000 }}
       animate={{ y: 0, transition: { delay: index * 0.1 } }}
-      className={`h-24 w-36 rounded-md place-items-center bg-[#f4d8b5] grid-row-${Math.floor(index / 4) + 1
-        } grid-column-${(index % 4) + 1} flex justify-center`}
+      className={`h-24 w-36 rounded-md place-items-center bg-[#f4d8b5] grid-row-${
+        Math.floor(index / 4) + 1
+      } grid-column-${(index % 4) + 1} flex justify-center`}
     >
       <div
-        className={`border-2 rounded-md p-2 border-[#b19578] w-[90%] h-[90%] flex flex-col justify-center text-center ${index === current ? "bg-red-500" : "none"
-          }`}
+        className={`border-2 rounded-md p-2 border-[#b19578] w-[90%] h-[90%] flex flex-col justify-center text-center ${
+          index === current ? "bg-red-500" : "none"
+        }`}
         onClick={() => {
-          ChooseSquare(item.word, index)
+          ChooseSquare(item.word, index);
         }}
       >
         <div className="flex flex-row-reverse place-items-end mb-2 justify-between">
@@ -55,15 +73,64 @@ const WordBox = () => {
     </motion.div>
   ));
 
+  // channel.on((event) => {
+  //   console.log(event.user?.id, client.userID);
+  //   if (event.type === ("game-move" as EventTypes)) {
+  //     let x = arr.map((item: { word: string }) => {
+  //       return item.word === selectedWord ? (item.word = "Varun") : item;
+  //     });
+  //     dispatch({ type: GET_WORDS, payload: x });
+  //   }
+  // });
+
+  // channel.on((event) => {
+  //   if (event.type === ("game-move" as EventTypes)) {
+  //     let x = arr.map((item: { word: string }, index: number) => {
+  //       if (index === event.data.index) {
+  //         item.word = "Varun";
+  //       }
+  //       return item;
+  //     });
+  //     dispatch({ type: GET_WORDS, payload: x });
+  //   }
+  // });
+
+  // channel.on((event) => {
+  //   if (event.type === ("game-move" as EventTypes)) {
+  //     let x = arr.map((item: { word: string }, index: number) => {
+  //       if (index === event.data.index) {
+  //         item.word = "Varun";
+  //       }
+  //       return item;
+  //     });
+  //     dispatch({ type: GET_WORDS, payload: x });
+  //   }
+  // });
+
+  // channel.on((event) => {
+  //   if (event.type === ("game-move" as EventTypes)) {
+  //     const eventData = event.data as GameMoveEventData;
+  //     const { selectedWord, index } = eventData;
+  //     let x = arr.map((item: { word: string }) => {
+  //       return item.word === selectedWord ? { word: "Varun" } : item;
+  //     });
+  //     dispatch({ type: GET_WORDS, payload: x });
+  //   }
+  // });
+
   channel.on((event) => {
-    console.log(event.user?.id, client.userID);
-    if (event.type === "game-move" as EventTypes) {
+    if (event.type === ("game-move" as EventTypes)) {
+      const eventData = event.data as GameMoveEventData;
+      const { selectedWord, index } = eventData;
       let x = arr.map((item: { word: string }) => {
-        return (item.word === selectedWord) ? item.word = "Varun" : item
-      })
-      dispatch({ type: GET_WORDS, payload: x })
+        return item.word === selectedWord ? { word: "Varun" } : item;
+      });
+      setCurrent(index);
+      setSelectedWord(selectedWord);
+      dispatch({ type: GET_WORDS, payload: x });
     }
   });
+
   return (
     <div className="grid fixed grid-cols-4 gap-x-5 gap-y-5 left-[30%] top-[12%] ">
       {gridItems}

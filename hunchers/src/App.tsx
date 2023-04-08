@@ -12,7 +12,6 @@
 //   );
 // }
 
-
 import "./App.css";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
@@ -30,8 +29,8 @@ function App() {
   const [isAuth, setIsAuth] = useState<Boolean>(false);
 
   const AuthToggle = (value: Boolean) => {
-    setIsAuth(value)
-  }
+    setIsAuth(value);
+  };
 
   const logOut = () => {
     cookies.remove("token");
