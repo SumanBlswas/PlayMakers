@@ -1,9 +1,10 @@
-import { GET_API_FAIL, GET_API_REQ, GET_API_SUC } from "./boardTypes";
+import { GET_API_FAIL, GET_API_REQ, GET_API_SUC, GET_WORDS } from "./boardTypes";
 
 let initValue = {
   board: [],
   isLoading: false,
   isError: false,
+  words: []
 };
 
 const reducer = (state = initValue, action: any) => {
@@ -29,6 +30,9 @@ const reducer = (state = initValue, action: any) => {
         isLoading: false,
         isError: true,
       };
+    }
+    case GET_WORDS: {
+      return { ...state, words: payload }
     }
     default:
       return state;

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
 
-function SignUp({ setIsAuth }) {
+interface UserDetails { firstName?: string, lastName?: string, username?: string, password?: string }
+
+function SignUp({ AuthToggle }: { AuthToggle: (value: Boolean) => void }) {
   const cookies = new Cookies();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<UserDetails | null>(null);
 
   const signUp = () => {
     Axios.post("https://ivory-donkey-suit.cyclic.app/signup", user).then(
@@ -17,7 +19,7 @@ function SignUp({ setIsAuth }) {
         cookies.set("firstName", firstName);
         cookies.set("lastName", lastName);
         cookies.set("hashedPassword", hashedPassword);
-        setIsAuth(true);
+        AuthToggle(true);
       }
     );
   };
