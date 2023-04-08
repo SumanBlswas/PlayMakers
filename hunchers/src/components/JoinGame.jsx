@@ -3,10 +3,33 @@ import { useChatContext, Channel } from "stream-chat-react";
 // import Game from "./Game";
 import CustomInput from "./CustomInput";
 import Board from "../pages/Board";
+import axios from "axios";
+import { useAppDispatch } from "../redux/store";
+import { CreateRoom, JoinRoom } from "../redux/boardRedux/boardAction";
 export default function JoinGame() {
   const [rivalUsername, setRivalUsername] = useState("");
+  const [userID, SetUserID] = useState("");
   const { client } = useChatContext();
   const [channel, setChannel] = useState(null);
+  const dispatch = useAppDispatch();
+
+  const joinChannel = async () => {
+    const response = await client.queryUsers({ name: { $eq: rivalUsername } });
+    /*{ name: { $eq: rivalUsername } }*/
+    if (response.users.length === 0) {
+      alert("User not found");
+      return;
+    }
+
+    const newChannel = await client.channel("messaging", {
+      members: [client.userID, response.users[0].id],
+    });
+
+    await newChannel.watch();
+    setChannel(newChannel);
+    dispatch(JoinRoom(userID));
+  };
+
   const createChannel = async () => {
     const response = await client.queryUsers({ name: { $eq: rivalUsername } });
     /*{ name: { $eq: rivalUsername } }*/
@@ -15,7 +38,7 @@ export default function JoinGame() {
       return;
     }
 
-    console.log(response);
+    dispatch(CreateRoom(client.userID));
 
     const newChannel = await client.channel("messaging", {
       members: [client.userID, response.users[0].id],
@@ -29,7 +52,7 @@ export default function JoinGame() {
       {channel ? (
         <Channel channel={channel} Input={CustomInput}>
           {/* <h1 channel={channel} setChannel={setChannel} /> */}
-          <Board />
+          <Board channel={channel} />
         </Channel>
       ) : (
         <div className="joinGame">
@@ -40,7 +63,17 @@ export default function JoinGame() {
               setRivalUsername(event.target.value);
             }}
           />
-          <button onClick={createChannel}> Join/Start Game</button>
+          <input
+            placeholder="roomId of Room"
+            onChange={(event) => {
+              SetUserID(event.target.value);
+            }}
+          />
+          <button onClick={createChannel}> Create Game</button>
+          <button onClick={joinChannel} className="ml-10">
+            {" "}
+            Join Game
+          </button>
         </div>
       )}
           

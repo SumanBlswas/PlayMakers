@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AppDispatch } from "../store";
-import { GET_API_FAIL, GET_API_REQ, GET_API_SUC } from "./boardTypes";
+import { GET_API_FAIL, GET_API_REQ, GET_API_SUC, GET_WORDS } from "./boardTypes";
 
 const getApiReq = () => {
   return {
@@ -33,4 +33,33 @@ const getBoardApi = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export { getBoardApi };
+const CreateRoom = (id: string) => async (dispatch: AppDispatch) => {
+
+  try {
+    // console.log(client.userID);
+    const res = await axios.post(
+      "https://ivory-donkey-suit.cyclic.app/rooms/create-room",
+      {
+        userID: id,
+      }
+    );
+    console.log(res.data)
+    dispatch({ type: GET_WORDS, payload: res.data.randomWords })
+    // console.log("response", res.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const JoinRoom = (id: string) => async (dispatch: AppDispatch) => {
+  console.log(id)
+  try {
+    const res = await axios.get(
+      `https://ivory-donkey-suit.cyclic.app/rooms/${id}`);
+    console.log("response", res.data)
+    dispatch({ type: GET_WORDS, payload: res.data.randomWords })
+  } catch (error) {
+    console.log(error);
+  }
+}
+export { getBoardApi, CreateRoom, JoinRoom };
