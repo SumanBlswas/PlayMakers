@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { BsEmojiHeartEyesFill } from "react-icons/bs";
 import { ImExit } from "react-icons/im";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { shallowEqual } from "react-redux";
+import { getBoardApi } from "../../redux/boardRedux/boardAction";
 
 const UserBtn = () => {
+  const { board } = useAppSelector((store) => {
+    return {
+      board: store.boardReducer.board,
+    };
+  }, shallowEqual);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getBoardApi());
+  }, [dispatch]);
+  console.log("alu", board);
   return (
     <>
       <Menu as="div">
         <Menu.Button className="flex gap-2 place-items-center bg-[#DBD4AF] rounded-2xl text-xl p-1 pr-4 pl-4 hover:bg-[#ac9f61]  shadow-md shadow-black">
-          <div>Hiru</div>
+          <div>{board[0].name}</div>
           <BsEmojiHeartEyesFill />
         </Menu.Button>
         <Transition
@@ -36,7 +51,10 @@ const UserBtn = () => {
                 {({ active }) => (
                   <div className="flex flex-col p-4 pt-2 text-center gap-8">
                     <p>Nickname</p>
-                    <input className="border-2 border-gray p-4 rounded-lg" placeholder="Hiru" />
+                    <input
+                      className="border-2 border-gray p-4 rounded-lg"
+                      placeholder={board[0].name}
+                    />
                     <button className="bg-yellow-300 p-4 pt-1 pb-1 rounded-xl hover:bg-yellow-500 shadow-md shadow-black">
                       Update Your Nickname
                     </button>
