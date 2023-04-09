@@ -21,11 +21,11 @@ const HomePage = () => {
       >
         <button
           onClick={() => {
-            navigate("/room");
+            navigate("/register");
           }}
           className="rounded-full text-2xl p-5 w-[250px] tracking-wider bg-yellow-300 text-black font-semibold hover:bg-yellow-400  shadow-md shadow-black"
         >
-          CREATE ROOM
+          START GAME
         </button>
       </motion.div>
 
