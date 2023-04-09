@@ -17,10 +17,12 @@ const WordBox = () => {
   const [currentTurn, setCurrentTurn] = useState<"player1" | "player2">(
     "player1"
   );
+
   // const [currentClue, setCurrentClue] = useState<string>("");
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
   const [chosenIndexes, setChosenIndexes] = useState<number[]>([]);
+
 
   const ChooseSquare = async (
     word: string,
@@ -38,6 +40,7 @@ const WordBox = () => {
       });
       setCurrentTurn("player2");
     }
+    
   };
 
   channel.on(
