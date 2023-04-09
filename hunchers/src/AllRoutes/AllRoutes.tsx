@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import Board from "../pages/Board";
 import Navbar from "../components/Navbar";
 import Room from "../pages/Room";
+import Register from "../pages/RegisterOrLogin";
 
 const AllRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AllRoutes = () => {
             </>
           }
         />
+        <Route path={"/register"} element={<Register />} />
         <Route path={"/room"} element={<Room />} />
       </Routes>
     </div>
