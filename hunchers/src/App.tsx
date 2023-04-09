@@ -1,6 +1,6 @@
 import "./App.css";
-import Login from "./components/Auth/Login";
-import SignUp from "./components/Auth/Signup";
+import Login from "./components/Login";
+import SignUp from "./components/Signup";
 import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
@@ -12,7 +12,11 @@ function App() {
   const cookies = new Cookies();
   const token = cookies.get("token");
   const client = StreamChat.getInstance(api_key);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState<Boolean>(false);
+
+  const AuthToggle = (value: Boolean) => {
+    setIsAuth(value);
+  };
 
   const logOut = () => {
     cookies.remove("token");
@@ -43,7 +47,7 @@ function App() {
       });
   }
   return (
-    <div className="App">
+    <div className="bg-gradient-to-b from-[#0f0c29] via-[#6060d5] to-[#0f0c29] h-screen">
       {isAuth ? (
         <Chat client={client}>
           <JoinGame />
@@ -51,8 +55,8 @@ function App() {
         </Chat>
       ) : (
         <>
-          <SignUp setIsAuth={setIsAuth} />
-          <Login setIsAuth={setIsAuth} />
+          <SignUp AuthToggle={AuthToggle} />
+          <Login AuthToggle={AuthToggle} />
         </>
       )}
     </div>

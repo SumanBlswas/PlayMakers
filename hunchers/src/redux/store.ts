@@ -6,8 +6,9 @@ import {
 } from "redux";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import thunk from "redux-thunk";
+import { reducer as boardReducer } from "./boardRedux/boardReducer";
 
-const root = combineReducers({});
+const root = combineReducers({ boardReducer });
 export const store = legacy_createStore(root, compose(applyMiddleware(thunk)));
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

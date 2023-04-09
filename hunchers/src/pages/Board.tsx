@@ -2,7 +2,6 @@ import React from "react";
 import Red from "./Board-Components/Red";
 import Blue from "./Board-Components/Blue";
 import WordBox from "./Board-Components/WordBox";
-
 const Board = () => {
   return (
     <div className="bg-gradient-to-b from-indigo-700 via-purple-600 to-purple-900">

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import Board from "../pages/Board";
 import Navbar from "../components/Navbar";
+import Room from "../pages/Room";
 
 const AllRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AllRoutes = () => {
             </>
           }
         />
+        <Route path={"/room"} element={<Room />} />
       </Routes>
     </div>
   );
