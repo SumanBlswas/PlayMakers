@@ -20,7 +20,7 @@ export default function JoinGame() {
       alert("User not found");
       return;
     }
-
+    console.log("join", response)
     const newChannel = await client.channel("messaging", {
       members: [client.userID as string, response.users[0].id as string],
     });

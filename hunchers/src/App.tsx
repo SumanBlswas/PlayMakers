@@ -61,7 +61,7 @@ function App() {
       });
   }
   return (
-    <div className="App">
+    <div className="bg-gradient-to-b from-[#0f0c29] via-[#6060d5] to-[#0f0c29] h-screen">
       {isAuth ? (
         <Chat client={client}>
           <JoinGame />
