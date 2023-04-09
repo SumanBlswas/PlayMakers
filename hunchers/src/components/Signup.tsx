@@ -29,34 +29,50 @@ function SignUp({ AuthToggle }: { AuthToggle: (value: Boolean) => void }) {
     );
   };
   return (
-    <div className="signUp">
-      <label> Sign Up</label>
-      <input
-        placeholder="First Name"
-        onChange={(event) => {
-          setUser({ ...user, firstName: event.target.value });
-        }}
-      />
-      <input
-        placeholder="Last Name"
-        onChange={(event) => {
-          setUser({ ...user, lastName: event.target.value });
-        }}
-      />
-      <input
-        placeholder="Username"
-        onChange={(event) => {
-          setUser({ ...user, username: event.target.value });
-        }}
-      />
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(event) => {
-          setUser({ ...user, password: event.target.value });
-        }}
-      />
-      <button onClick={signUp}> Sign Up</button>
+    <div className="signUp pt-[15%] pb-[18%] ">
+      <div className="flex flex-wrap flex-col place-items-center p-4 gap-3">
+        <div className="flex flex-wrap flex-col gap-4  p-5 bg-white rounded-xl shadow-xl shadow-red">
+          <input
+            className="p-2 rounded-md border border-black text-center"
+            placeholder="First Name"
+            onChange={(event) => {
+              setUser({ ...user, firstName: event.target.value });
+            }}
+          />
+          <input
+            className="p-2 rounded-md border border-black text-center"
+            placeholder="Last Name"
+            onChange={(event) => {
+              setUser({ ...user, lastName: event.target.value });
+            }}
+          />
+          <input
+            className="p-2 rounded-md border border-black text-center"
+            placeholder="Username"
+            onChange={(event) => {
+              setUser({ ...user, username: event.target.value });
+            }}
+          />
+          <input
+            className="p-2 rounded-md border border-black text-center"
+            placeholder="Password"
+            type="password"
+            onChange={(event) => {
+              setUser({ ...user, password: event.target.value });
+            }}
+          />
+          <button
+            className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50"
+            onClick={signUp}
+          >
+            {" "}
+            Sign Up
+          </button>
+        </div>
+        <div className="p-4 pt-2 pb-2 bg-white rounded-xl ">
+          Already Have An Account !
+        </div>
+      </div>
     </div>
   );
 }

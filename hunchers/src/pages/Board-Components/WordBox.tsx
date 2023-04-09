@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useChannelStateContext } from "stream-chat-react";
-// import { CreateRoom, JoinRoom } from "../../redux/boardRedux/boardAction";
 import { EventTypes } from "stream-chat";
 import { GET_WORDS } from "../../redux/boardRedux/boardTypes";
 
@@ -20,15 +19,6 @@ const WordBox = () => {
   let arr = useAppSelector((state) => state.boardReducer.words);
 
   const [current, setCurrent] = useState<number | null>(null);
-
-  // const ChooseSquare = async (word: string, index: number) => {
-  //   setCurrent(index);
-  //   setSelectedWord(word);
-  //   await channel.sendEvent({
-  //     type: "game-move" as EventTypes,
-  //     data: { selectedWord, index },
-  //   });
-  // };
 
   const ChooseSquare = async (word: string, index: number) => {
     setCurrent(index);
@@ -73,51 +63,6 @@ const WordBox = () => {
     </motion.div>
   ));
 
-  // channel.on((event) => {
-  //   console.log(event.user?.id, client.userID);
-  //   if (event.type === ("game-move" as EventTypes)) {
-  //     let x = arr.map((item: { word: string }) => {
-  //       return item.word === selectedWord ? (item.word = "Varun") : item;
-  //     });
-  //     dispatch({ type: GET_WORDS, payload: x });
-  //   }
-  // });
-
-  // channel.on((event) => {
-  //   if (event.type === ("game-move" as EventTypes)) {
-  //     let x = arr.map((item: { word: string }, index: number) => {
-  //       if (index === event.data.index) {
-  //         item.word = "Varun";
-  //       }
-  //       return item;
-  //     });
-  //     dispatch({ type: GET_WORDS, payload: x });
-  //   }
-  // });
-
-  // channel.on((event) => {
-  //   if (event.type === ("game-move" as EventTypes)) {
-  //     let x = arr.map((item: { word: string }, index: number) => {
-  //       if (index === event.data.index) {
-  //         item.word = "Varun";
-  //       }
-  //       return item;
-  //     });
-  //     dispatch({ type: GET_WORDS, payload: x });
-  //   }
-  // });
-
-  // channel.on((event) => {
-  //   if (event.type === ("game-move" as EventTypes)) {
-  //     const eventData = event.data as GameMoveEventData;
-  //     const { selectedWord, index } = eventData;
-  //     let x = arr.map((item: { word: string }) => {
-  //       return item.word === selectedWord ? { word: "Varun" } : item;
-  //     });
-  //     dispatch({ type: GET_WORDS, payload: x });
-  //   }
-  // });
-
   channel.on((event) => {
     if (event.type === ("game-move" as EventTypes)) {
       const eventData = event.data as GameMoveEventData;
@@ -139,19 +84,3 @@ const WordBox = () => {
 };
 
 export default WordBox;
-
-// channel.on((event) => {
-//     if (event.type == "game-move" && event.user.id !== client.userID) {
-//       const currentPlayer = event.data.player === "X" ? "O" : "X";
-//       setPlayer(currentPlayer);
-//       setTurn(currentPlayer);
-//       setBoard(
-//         board.map((val, idx) => {
-//           if (idx === event.data.square && val === "") {
-//             return event.data.player;
-//           }
-//           return val;
-//         })
-//       );
-//     }
-//   });
