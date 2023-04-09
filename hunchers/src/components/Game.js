@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 import Board from "./Board";
 import { Window, MessageList, MessageInput } from "stream-chat-react";
 function Game({ channel, setChannel }) {
@@ -20,4 +20,4 @@ function Game({ channel, setChannel }) {
   );
 }
 
-export default Game;
+export default Game*/

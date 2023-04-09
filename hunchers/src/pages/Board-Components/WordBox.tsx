@@ -26,6 +26,10 @@ const WordBox = () => {
     "player1"
   );
   const [currentClue, setCurrentClue] = useState<string>("");
+  const [player1score,setplayer1score]=useState<Number>(0)
+  const [player2score,setplayer2score]=useState<Number>(0)
+
+  const [count,setCount]=useState(0)
 
   const ChooseSquare = async (
     word: string,
@@ -38,6 +42,16 @@ const WordBox = () => {
         data: { word, index, definition },
       });
       setCurrentTurn("player2");
+    }
+    if(count<2){
+      setCount(count+1)
+    }else{
+      setCount(0)
+    }
+    if(count==2){
+      setCurrentTurn("player2");
+    }else{
+      setCurrentTurn("player1");
     }
   };
 

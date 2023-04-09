@@ -50,8 +50,9 @@ function App() {
     <div className="bg-gradient-to-b from-[#0f0c29] via-[#6060d5] to-[#0f0c29] h-screen">
       {isAuth ? (
         <Chat client={client}>
+        <button  onClick={logOut}> Log Out</button>
           <JoinGame />
-          <button onClick={logOut}> Log Out</button>
+         
         </Chat>
       ) : (
         <>

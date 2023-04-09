@@ -1,0 +1,62 @@
+body{
+  background: #0f0c29;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #59599d, #302b63, #1e156e);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #4141ae, #6c62d4, #5041d8);
+}
+.joinGame{
+    width: 30%;
+    height: 300px;
+    margin: auto;
+    padding-top: 20px;
+    background-color: #dbd4af;
+    border-radius: 20px;
+}
+.creatGame_heading{
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 700;    
+}
+.img_div{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input{
+    width: 80%;
+    height: 40px;
+    margin-left: 10%;
+    margin-top: 30PX;
+    border-radius: 10px;
+}
+input::placeholder{
+    font-size: medium;
+    font-weight: 700;
+    color: #0f0c29;
+    padding-left: 10px;
+}
+
+.joinGame_Button{
+    border: 2px solid black;
+    margin-top: 30px;
+    width: 40%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color:yellow;
+    font-size: larger;
+    font-weight: 600;
+
+}
+.button_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+   
+}
+.bottom_imgdiv{
+    display: flex;
+    justify-content: flex-end;
+}
